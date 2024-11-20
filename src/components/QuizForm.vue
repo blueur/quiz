@@ -5,6 +5,11 @@ import { computed, ref } from 'vue'
 
 const cheval = ref<string | null>(null)
 const chat = ref<string | null>(null)
+const correctAnswers = ref<boolean[]>([])
+const score = computed<number>(
+  () => correctAnswers.value.filter(value => value).length,
+)
+const totalScore = computed<number>(() => correctAnswers.value.length)
 const filled = computed<boolean>(
   () => cheval.value !== null && chat.value !== null,
 )
@@ -32,18 +37,20 @@ function reset(event: Event): void {
   <form>
     <QuestionRadio
       id="cheval"
-      v-model="cheval"
+      v-model="correctAnswers[0]"
       text="De quelle couleur est le cheval blanc de Napoléon ?"
       :options="[
         { value: 'blanc', text: 'Blanc' },
         { value: 'brun', text: 'Brun' },
         { value: 'noir', text: 'Noir' },
       ]"
+      answer="blanc"
     />
     <QuestionText
       id="chat"
-      v-model="chat"
+      v-model="correctAnswers[1]"
       text="Combien de pattes a un chat ?"
+      answer="4"
       placeholder="Veuillez saisir un nombre"
     />
     <br />
@@ -55,5 +62,7 @@ function reset(event: Event): void {
       Terminer
     </button>
     <button class="btn btn-secondary" @click="reset">Réinitialiser</button>
+    <div>Réponses correctes : {{ correctAnswers }}</div>
+    <div>Score : {{ score }} / {{ totalScore }}</div>
   </form>
 </template>

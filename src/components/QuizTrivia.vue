@@ -9,7 +9,7 @@ const questions = ref<
     incorrect_answers: string[]
   }[]
 >([])
-const answers = reactive<{ [key: number]: string | null }>({})
+const answers = reactive<{ [key: number]: boolean }>({})
 
 fetch('https://opentdb.com/api.php?amount=10&type=multiple')
   .then(response => response.json())
@@ -31,6 +31,7 @@ fetch('https://opentdb.com/api.php?amount=10&type=multiple')
           text: answer,
         })),
       ]"
+      :answer="question.correct_answer"
     />
   </form>
 </template>
