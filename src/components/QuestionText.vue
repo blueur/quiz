@@ -7,6 +7,7 @@ const props = defineProps({
   id: { type: String, required: true },
   text: { type: String, required: true },
   answer: { type: String, required: true },
+  answerDetail: { type: String, default: '' },
   placeholder: { type: String, default: 'Veuillez saisir une réponse' },
 })
 
@@ -49,4 +50,11 @@ watch(model, newModel => {
     "
     :placeholder="props.placeholder"
   />
+  <div v-if="model === QuestionState.Correct || model === QuestionState.Wrong">
+    <p v-if="model === QuestionState.Correct" class="text-success">Juste !</p>
+    <p v-else class="text-danger">
+      Faux ! La réponse était : {{ props.answer }}
+    </p>
+    <p class="blockquote-footer">{{ props.answerDetail }}</p>
+  </div>
 </template>

@@ -43,12 +43,14 @@ function reset(event: Event): void {
         { value: 'noir', text: 'Noir' },
       ]"
       answer="blanc"
+      answer-detail="La réponse est dans la question."
     />
     <QuestionText
       id="chat"
       v-model="questionStates[1]"
       text="Combien de pattes a un chat ?"
       answer="4"
+      answer-detail="Le chat est un mammifère quadrupède."
       placeholder="Veuillez saisir un nombre"
     />
     <br />
